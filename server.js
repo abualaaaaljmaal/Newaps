@@ -1,8 +1,14 @@
 const fs = require("fs");
 const axios = require("axios");
 const TelegramBot = require("node-telegram-bot-api");
+const express = require("express");
 
-const TOKEN = "8588784774:AAHuVdnTaIUlW-01cDn_HU8_UguTLgrLTbk";
+const TOKEN = process.env.BOT_TOKEN; // حط التوكن في Render Environment
+if (!TOKEN) {
+  console.log("❌ BOT_TOKEN not found in environment variables!");
+  process.exit(1);
+}
+
 const bot = new TelegramBot(TOKEN, { polling: true });
 
 function extractGithubRepo(url) {
@@ -72,3 +78,15 @@ bot.on("message", async (msg) => {
 });
 
 console.log("Bot Running...");
+
+// ✅ Web Server (عشان Render يكتشف Port)
+const app = express();
+
+app.get("/", (req, res) => {
+  res.send("Bot is Running... © هيثم محمود الجمال");
+});
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log("Web Server Running on Port:", PORT);
+});
