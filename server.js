@@ -2,7 +2,7 @@ const fs = require("fs");
 const axios = require("axios");
 const TelegramBot = require("node-telegram-bot-api");
 
-const TOKEN = "PUT_YOUR_BOT_TOKEN_HERE";
+const TOKEN = "8588784774:AAHuVdnTaIUlW-01cDn_HU8_UguTLgrLTbk";
 const bot = new TelegramBot(TOKEN, { polling: true });
 
 function extractGithubRepo(url) {
